@@ -28,5 +28,10 @@ class Animals:
 
 
 class Goose(Animals):
-    def __init__(self, name, weight, meal, ):
+    def __init__(self, name, weight, meal):
+        Animals.__init__(self, name, weight, meal)
+
+
+class Cow(Animals):
+    def __init__(self, name, weight, meal):
         Animals.__init__(self, name, weight, meal)
