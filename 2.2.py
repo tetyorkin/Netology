@@ -89,8 +89,17 @@ class Cow(MilkAnimals):
 
 
 class Sheep(Animals):
-    def __init__(self, name, weight, meal, voice):
+    def __init__(self, name, weight, meal, voice, wool):
         Animals.__init__(self, name, weight, meal, voice)
+        self.__wool = wool
+
+    def set_wool(self, wool):
+        self.__wool = wool
+        self.set_weight(self.get_weight() - (wool * PROFIT_WOOL))
+
+    def get_wool(self):
+        if self.get_weight() > 0:
+            return self.__wool
 
 
 class Chicken(Birds):
@@ -104,7 +113,7 @@ class Goat(MilkAnimals):
 
 
 class Duck(Birds):
-    def __init__(self, name, weight, meal, voice, profit, eggs):
+    def __init__(self, name, weight, meal, voice, eggs):
         Birds.__init__(self, name, weight, meal, voice, eggs)
 
 
@@ -160,6 +169,8 @@ def cow():
 
 
 cow()
+
+
 def goat():
     goat1 = Goat("Рога", 30000, 0, "Беее Беее", 0)
     goat2 = Goat("Копыта", 25000, 0, "Беее Мееее", 0)
@@ -177,4 +188,57 @@ def goat():
           f"{goat1.get_name()} - {goat1.get_weight() / 1000}\n"
           f"{goat2.get_name()} - {goat2.get_weight() / 1000}")
 
+
 goat()
+
+
+def sheep():
+    name_animal = "Овцы"
+    sheep1 = Sheep("Барашек", 20000, 0, "Геее гееее", 0)
+    sheep2 = Sheep("Кудрявый", 35000, 0, "Гррр грррр", 0)
+    print("\n{:*^90}".format(name_animal))
+    print(f"Животные - {name_animal}:")
+    print(f"{sheep1.get_name()} и {sheep2.get_name()}")
+    print(f"Масса {sheep1.get_name()} - {sheep1.get_weight() / 1000}\n"
+          f"Масса {sheep2.get_name()} - {sheep2.get_weight() / 1000}")
+    sheep1.set_meal(2000)
+    sheep2.set_meal(6000)
+    print(f"Приём пищи:\n"
+          f"{sheep1.get_name()} {sheep1.get_meal() / 1000} килограмм\n"
+          f"{sheep2.get_name()} {sheep2.get_meal() / 1000} килограмм")
+    print(f"Вес после приёма пищи:\n"
+          f"{sheep1.get_name()} {sheep1.get_weight() / 1000} килограмм\n"
+          f"{sheep2.get_name()} {sheep2.get_weight() / 1000} килограмм")
+    sheep1.set_wool(2000)
+    sheep1.set_wool(1500)
+    print(f"Вес после забора профита:\n"
+          f"{sheep1.get_name()} {sheep1.get_weight() / 1000} килограмм\n"
+          f"{sheep2.get_name()} {sheep2.get_weight() / 1000} килограмм")
+    print(f"Подали голос:"
+          f"{sheep1.get_name()} - {sheep1.get_voice()}\n"
+          f"{sheep2.get_name()} - {sheep2.get_voice()}")
+
+
+sheep()
+
+
+def duck():
+    name_animal = "Утка"
+    duck1 = Duck("Кряква", 5000, 0, "Кря Кря Кря", 0)
+    print("\n{:*^90}".format(name_animal))
+    print(f"Животные - {name_animal}:")
+    print(f"{duck1.get_name()}")
+    print(f"Масса {duck1.get_name()} - {duck1.get_weight() / 1000}")
+    duck1.set_meal(2000)
+    print(f"Приём пищи:\n"
+          f"{duck1.get_name()} {duck1.get_meal() / 1000} килограмм")
+    print(f"Вес после приёма пищи:\n"
+          f"{duck1.get_name()} {duck1.get_weight() / 1000} килограмм")
+    duck1.set_eggs(3)
+    print(f"Вес после забора профита:\n"
+          f"{duck1.get_name()} {duck1.get_weight() / 1000:.2f} килограмм")
+    print(f"Подали голос:\n"
+          f"{duck1.get_name()} - {duck1.get_voice()}")
+
+
+duck()
