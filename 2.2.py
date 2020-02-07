@@ -1,7 +1,7 @@
 # Введём коэфицент добавления массы животного от количества съеденой им еды - WEIGHT_FOOD
-# Коэфицент снятия профита с птиц - PROFIT_EGGS
-# Коэфицент снятия профита с парнокопытных - PROFIT_MILK
-# Коэфицент снятия профита с овец - PROFIT_WOOL
+# Коэфицент уменьшения массы при снятии профита с птиц - PROFIT_EGGS
+# Коэфицент уменьшения массы при снятии профита с парнокопытных - PROFIT_MILK
+# Коэфицент уменьшения массы при снятии профита с овец - PROFIT_WOOL
 WEIGHT_FOOD = 0.2
 PROFIT_EGGS = 0.05
 PROFIT_MILK = 0.4
@@ -98,9 +98,9 @@ class Chicken(Birds):
         Birds.__init__(self, name, weight, meal, voice, eggs)
 
 
-class Goat(Animals):
-    def __init__(self, name, weight, meal, voice):
-        Animals.__init__(self, name, weight, meal, voice)
+class Goat(MilkAnimals):
+    def __init__(self, name, weight, meal, voice, milk):
+        MilkAnimals.__init__(self, name, weight, meal, voice, milk)
 
 
 class Duck(Birds):
@@ -160,3 +160,21 @@ def cow():
 
 
 cow()
+def goat():
+    goat1 = Goat("Рога", 30000, 0, "Беее Беее", 0)
+    goat2 = Goat("Копыта", 25000, 0, "Беее Мееее", 0)
+    print("\n{:*^90}".format("Козы"))
+    print(f"Одну козу зовут {goat1.get_name()}, вторую {goat2.get_name()}")
+    print(f"{goat1.get_name()} весит {int(goat1.get_weight() / 1000)} килограмм "
+          f"{goat2.get_name()} весит {int(goat2.get_weight() / 1000)} килограмм")
+    goat1.set_meal(7000)
+    goat2.set_meal(3000)
+    print(f"{goat1.get_name()} съела {int(goat1.get_meal() / 1000)} килограмма травы\n"
+          f"{goat2.get_name()} съела {int(goat2.get_meal() / 1000)} килограмма травы")
+    goat1.set_milk(5000)
+    goat1.set_milk(5000)
+    print(f"После усвоения пищи и доения коз, их масса стала следующей:\n"
+          f"{goat1.get_name()} - {goat1.get_weight() / 1000}\n"
+          f"{goat2.get_name()} - {goat2.get_weight() / 1000}")
+
+goat()
