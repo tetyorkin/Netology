@@ -13,69 +13,71 @@ class Animals:
 
     # Метод будет принимать аргументы имени, массы животного и его кормления.
     def __init__(self, name, weight, meal, voice):
-        self.__name = name
-        self.__meal = meal
-        self.__weight = weight
-        self.__voice = voice
+        self.name = name
+        self.meal = meal
+        self.weight = weight
+        self.voice = voice
 
     # Метод для добавления имени животного
     def set_name(self, name):
-        self.__name = name
+        self.name = name
 
     # Метод для добавления массы животного
     def set_weight(self, weight):
-        self.__weight = weight
+        self.weight = weight
 
     # Метод для добавления значения количества еды и прибаления массы от еды.
     def set_meal(self, meal):
-        self.__meal = meal
+        self.meal = meal
         self.set_weight(self.get_weight() + (meal * WEIGHT_FOOD))
 
     def set_voice(self, voice):
-        self.__voice = voice
+        self.voice = voice
 
     def get_name(self):
-        return self.__name
+        return self.name
 
     # Метод отображения текущей массы
     def get_weight(self):
-        return self.__weight
+        return self.weight
 
     # Метод отображения съеденой еды
     def get_meal(self):
-        return self.__meal
+        return self.meal
 
     # Метод воспроизведения голоса животного
     def get_voice(self):
-        return self.__voice
+        return self.voice
 
 
+# Родительский класс для птиц
 class Birds(Animals):
     def __init__(self, name, weight, meal, voice, eggs):
         Animals.__init__(self, name, weight, meal, voice)
-        self.__eggs = eggs
+        self.eggs = eggs
 
     def set_eggs(self, eggs):
-        self.__eggs = eggs
+        self.eggs = eggs
         self.set_weight(self.get_weight() - (eggs * PROFIT_EGGS))
 
     def get_eggs(self):
         if self.get_weight() > 0:
-            return self.__eggs
+            return self.eggs
 
 
+# Родительский класс для животных которых можно доить
 class MilkAnimals(Animals):
     def __init__(self, name, weight, meal, voice, milk):
         Animals.__init__(self, name, weight, meal, voice)
-        self.__milk = milk
+        self.milk = milk
 
     def set_milk(self, milk):
-        self.__milk = milk
+        self.milk = milk
         self.set_weight(self.get_weight() - (milk * PROFIT_MILK))
 
     def get_milk(self):
         if self.get_weight() > 0:
-            return self.__milk
+            return self.milk
 
 
 class Goose(Birds):
@@ -91,15 +93,15 @@ class Cow(MilkAnimals):
 class Sheep(Animals):
     def __init__(self, name, weight, meal, voice, wool):
         Animals.__init__(self, name, weight, meal, voice)
-        self.__wool = wool
+        self.wool = wool
 
     def set_wool(self, wool):
-        self.__wool = wool
+        self.wool = wool
         self.set_weight(self.get_weight() - (wool * PROFIT_WOOL))
 
     def get_wool(self):
         if self.get_weight() > 0:
-            return self.__wool
+            return self.wool
 
 
 class Chicken(Birds):
@@ -278,14 +280,15 @@ def max_weight():
     all_dict.update(goat())
     all_dict.update(sheep())
     all_dict.update(duck())
-    print(all_dict)
     for key, weight in all_dict.items():
         if weight > weight_max:
             name_animal = key
             weight_max = weight
         weight_all += weight_max
-    print(f"Общая масса всех животных равна {weight_all:.1f} килограмм, максимальная масса тела у животтного с именем "
-          f"{name_animal} и массой {weight_max} килограмм")
+    print(
+        f"\nОбщая масса всех животных равна {weight_all:.1f} килограмм, максимальная масса тела у животтного с именем "
+        f"{name_animal} и массой {weight_max} килограмм")
 
 
-max_weight()
+if __name__ == "__main__":
+    max_weight()
