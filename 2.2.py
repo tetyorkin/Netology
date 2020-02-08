@@ -165,7 +165,7 @@ def gooses():
 
 
 def cow():
-    cow1 = Cow("Манька", 10000, 0, "Мууу Муму Муууу", 0)
+    cow1 = Cow("Манька", 100000, 0, "Мууу Муму Муууу", 0)
     weight_kg = cow1.get_weight() / 1000
     name_animal = "Корова"
     print("\n{:*^90}".format(name_animal))
