@@ -11,7 +11,7 @@ PROFIT_WOOL = 0.02
 # Родительский класс для всех животных
 class Animals:
 
-    # Метод будет принимать аргументы имени, массы животного и его кормления.
+    # Метод будет принимать аргументы имени, массы животного, его кормления и голоса.
     def __init__(self, name, weight, meal, voice):
         self.name = name
         self.meal = meal
@@ -31,9 +31,11 @@ class Animals:
         self.meal = meal
         self.set_weight(self.get_weight() + (meal * WEIGHT_FOOD))
 
+    # Метод возвращает голос животного
     def set_voice(self, voice):
         self.voice = voice
 
+    # Метод возвращает имя животного
     def get_name(self):
         return self.name
 
@@ -56,13 +58,14 @@ class Birds(Animals):
         Animals.__init__(self, name, weight, meal, voice)
         self.eggs = eggs
 
+    # Метод снятия профита с птицы и уменьшение массы
     def set_eggs(self, eggs):
         self.eggs = eggs
         self.set_weight(self.get_weight() - (eggs * PROFIT_EGGS))
 
+    # Метод отображения количества снятого профита с птицы
     def get_eggs(self):
-        if self.get_weight() > 0:
-            return self.eggs
+        return self.eggs
 
 
 # Родительский класс для животных которых можно доить
@@ -71,10 +74,12 @@ class MilkAnimals(Animals):
         Animals.__init__(self, name, weight, meal, voice)
         self.milk = milk
 
+    # Метод снятия профита с животного, которое доят и уменьшение массы
     def set_milk(self, milk):
         self.milk = milk
         self.set_weight(self.get_weight() - (milk * PROFIT_MILK))
 
+    # Метод отображения количества снятого профита с животного, которое доят
     def get_milk(self):
         if self.get_weight() > 0:
             return self.milk
@@ -95,10 +100,12 @@ class Sheep(Animals):
         Animals.__init__(self, name, weight, meal, voice)
         self.wool = wool
 
+    # Метод снятия профита с овцы
     def set_wool(self, wool):
         self.wool = wool
         self.set_weight(self.get_weight() - (wool * PROFIT_WOOL))
 
+    # Метод отображения количества снятого профита с овцы
     def get_wool(self):
         if self.get_weight() > 0:
             return self.wool
@@ -158,7 +165,7 @@ def gooses():
 
 
 def cow():
-    cow1 = Cow("Манька", 100000, 0, "Мууу Муму Муууу", 0)
+    cow1 = Cow("Манька", 10000, 0, "Мууу Муму Муууу", 0)
     weight_kg = cow1.get_weight() / 1000
     name_animal = "Корова"
     print("\n{:*^90}".format(name_animal))
