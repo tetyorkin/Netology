@@ -118,78 +118,101 @@ class Duck(Birds):
 
 
 def gooses():
-    goose1 = Goose("", 0, 0, "", 0)
-    goose2 = Goose("", 0, 0, "", 0)
+    goose1 = Goose("", 0, 0, "Га га Га", 0)
+    goose2 = Goose("", 0, 0, "Га га Га", 0)
     goose1.set_name("Серый")
     goose2.set_name("Белый")
     goose1.set_weight(6000)
     goose2.set_weight(6500)
-
-    print("\n{:*^90}".format("Гуси"))
-    print(f"У бабуси живёт два гуся один {goose2.get_name()}, другой {goose1.get_name()}\n"
-          f"{goose2.get_name()} масса = {goose2.get_weight()}\n"
-          f"{goose1.get_name()} масса = {goose1.get_weight()}")
-    goose2.set_meal(500)
-    goose1.set_meal(700)
-    print(f"Покормила их бабушка: {goose2.get_name()} съел {goose2.get_meal()}  грамм пшена "
-          f"{goose1.get_name()} съел {goose1.get_meal()}  грамм пшена\n"
-          f"После усвоения еды масса у гусей изменилась:\n"
-          f"{goose2.get_name()} масса = {goose2.get_weight()}\n"
-          f"{goose1.get_name()} масса = {goose1.get_weight()}")
+    name_animal = "Гуси"
+    print("\n{:*^90}".format(name_animal))
+    print(f"Животные - {name_animal}:")
+    print(f"{goose1.get_name()} и {goose2.get_name()}")
+    print(f"Масса {goose1.get_name()} - {goose1.get_weight() / 1000}\n"
+          f"Масса {goose2.get_name()} - {goose2.get_weight() / 1000}")
+    goose1.set_meal(2000)
+    goose2.set_meal(6000)
+    print(f"Приём пищи (масса пищи):\n"
+          f"{goose1.get_name()} {goose1.get_meal() / 1000} килограмм\n"
+          f"{goose2.get_name()} {goose2.get_meal() / 1000} килограмм")
+    print(f"Вес после приёма пищи:\n"
+          f"{goose1.get_name()} {goose1.get_weight() / 1000} килограмм\n"
+          f"{goose2.get_name()} {goose2.get_weight() / 1000} килограмм")
     goose1.set_eggs(2)
-    goose2.set_eggs(2)
-    print(f"После отдыха гусей бабушка собрала у гусей яйца по {goose1.get_eggs()} у каждого и их маасса изменилась\n"
-          f"{goose2.get_name()} масса = {goose2.get_weight()}\n"
-          f"{goose1.get_name()} масса = {goose1.get_weight()}")
-    goose1.set_voice("Га Га Га")
-    goose2.set_voice("Га Га Га")
-    print(f"И стали гуси от такой беззаботной жизни гагатать и {goose1.get_name()}, и {goose2.get_name()} "
-          f"-'{goose1.get_voice()}'"
-          f" -'{goose2.get_voice()}'")
+    goose2.set_eggs(6)
+    print(f"Вес после забора профита:\n"
+          f"{goose1.get_name()} {goose1.get_weight() / 1000:.1f} килограмм\n"
+          f"{goose2.get_name()} {goose2.get_weight() / 1000:.1f} килограмм")
+    print(f"Подали голос:\n"
+          f"{goose1.get_name()} - {goose1.get_voice()}\n"
+          f"{goose2.get_name()} - {goose2.get_voice()}")
+    weight_goose1 = goose1.get_weight() / 1000
+    weight_goose2 = goose2.get_weight() / 1000
+    goose_dict = {goose1.get_name(): weight_goose1, goose2.get_name(): weight_goose2}
+    return goose_dict
 
 
-gooses()
+# print(gooses())
 
 
 def cow():
-    cow1 = Cow("Манька", 100000, 0, "", 0)
+    cow1 = Cow("Манька", 100000, 0, "Мууу Муму Муууу", 0)
     weight_kg = cow1.get_weight() / 1000
-    print("\n{:*^90}".format("Корова"))
-    print(f"У бабушки есть корова, корову звать - {cow1.get_name()}, "
-          f"масса коровы {weight_kg} кг.")
+    name_animal = "Корова"
+    print("\n{:*^90}".format(name_animal))
+    print(f"Животные - {name_animal}:")
+    print(f"{cow1.get_name()}")
+    print(f"Масса {cow1.get_name()} - {cow1.get_weight() / 1000}")
     cow1.set_meal(15000)
-    print(f"Съела {cow1.get_name()}  {cow1.get_meal() / 1000} кг. травы "
-          f"и её масса после усвоения еды изменилась до {cow1.get_weight() / 1000} кг.")
+    print(f"Приём пищи:\n"
+          f"{cow1.get_name()} {cow1.get_meal() / 1000} килограмм")
+    print(f"Вес после приёма пищи:\n"
+          f"{cow1.get_name()} {cow1.get_weight() / 1000} килограмм")
     cow1.set_milk(20000)
-    cow1.set_voice("Муууу, Мууууу")
-    print(f"Подоила бабушка корову и выдоила у неё {cow1.get_milk() / 1000} литров молока "
-          f"и похудела {cow1.get_name()} до {cow1.get_weight() / 1000} кг\n"
-          f"И замычала {cow1.get_name()} от тоски "
-          f"-'{cow1.get_voice()}'")
+    print(f"Вес после забора профита:\n"
+          f"{cow1.get_name()} {cow1.get_weight() / 1000:.2f} килограмм")
+    print(f"Подали голос:\n"
+          f"{cow1.get_name()} - {cow1.get_voice()}")
+    weight_cow = cow1.get_weight() / 1000
+    cows_dict = {cow1.get_name(): weight_cow}
+    return cows_dict
 
 
-cow()
+# cow()
 
 
 def goat():
+    name_animal = "Овцы"
     goat1 = Goat("Рога", 30000, 0, "Беее Беее", 0)
     goat2 = Goat("Копыта", 25000, 0, "Беее Мееее", 0)
-    print("\n{:*^90}".format("Козы"))
-    print(f"Одну козу зовут {goat1.get_name()}, вторую {goat2.get_name()}")
-    print(f"{goat1.get_name()} весит {int(goat1.get_weight() / 1000)} килограмм "
-          f"{goat2.get_name()} весит {int(goat2.get_weight() / 1000)} килограмм")
-    goat1.set_meal(7000)
-    goat2.set_meal(3000)
-    print(f"{goat1.get_name()} съела {int(goat1.get_meal() / 1000)} килограмма травы\n"
-          f"{goat2.get_name()} съела {int(goat2.get_meal() / 1000)} килограмма травы")
+    print("\n{:*^90}".format(name_animal))
+    print(f"Животные - {name_animal}:")
+    print(f"{goat1.get_name()} и {goat2.get_name()}")
+    print(f"Масса {goat1.get_name()} - {goat1.get_weight() / 1000}\n"
+          f"Масса {goat2.get_name()} - {goat2.get_weight() / 1000}")
+    goat1.set_meal(4000)
+    goat2.set_meal(6000)
+    print(f"Приём пищи:\n"
+          f"{goat1.get_name()} {goat1.get_meal() / 1000} килограмм\n"
+          f"{goat2.get_name()} {goat2.get_meal() / 1000} килограмм")
+    print(f"Вес после приёма пищи:\n"
+          f"{goat1.get_name()} {goat1.get_weight() / 1000} килограмм\n"
+          f"{goat2.get_name()} {goat2.get_weight() / 1000} килограмм")
     goat1.set_milk(5000)
     goat1.set_milk(5000)
-    print(f"После усвоения пищи и доения коз, их масса стала следующей:\n"
-          f"{goat1.get_name()} - {goat1.get_weight() / 1000}\n"
-          f"{goat2.get_name()} - {goat2.get_weight() / 1000}")
+    print(f"Вес после забора профита:\n"
+          f"{goat1.get_name()} {goat1.get_weight() / 1000} килограмм\n"
+          f"{goat2.get_name()} {goat2.get_weight() / 1000} килограмм")
+    print(f"Подали голос:"
+          f"{goat1.get_name()} - {goat1.get_voice()}\n"
+          f"{goat2.get_name()} - {goat2.get_voice()}")
+    weight_goat1 = goat1.get_weight() / 1000
+    weight_goat2 = goat2.get_weight() / 1000
+    goats_dict = {goat1.get_name(): weight_goat1, goat2.get_name(): weight_goat2}
+    return goats_dict
 
 
-goat()
+# goat()
 
 
 def sheep():
@@ -214,12 +237,13 @@ def sheep():
     print(f"Вес после забора профита:\n"
           f"{sheep1.get_name()} {sheep1.get_weight() / 1000} килограмм\n"
           f"{sheep2.get_name()} {sheep2.get_weight() / 1000} килограмм")
-    print(f"Подали голос:"
+    print(f"Подали голос:\n"
           f"{sheep1.get_name()} - {sheep1.get_voice()}\n"
           f"{sheep2.get_name()} - {sheep2.get_voice()}")
-
-
-sheep()
+    weight_sheep1 = sheep1.get_weight() / 1000
+    weight_sheep2 = sheep2.get_weight() / 1000
+    sheep_dict = {sheep1.get_name(): weight_sheep1, sheep2.get_name(): weight_sheep2}
+    return sheep_dict
 
 
 def duck():
@@ -239,6 +263,29 @@ def duck():
           f"{duck1.get_name()} {duck1.get_weight() / 1000:.2f} килограмм")
     print(f"Подали голос:\n"
           f"{duck1.get_name()} - {duck1.get_voice()}")
+    weight_duck = duck1.get_weight() / 1000
+    ducks_dict = {duck1.get_name(): weight_duck}
+    return ducks_dict
 
 
-duck()
+def max_weight():
+    weight_max = 0
+    weight = 0
+    weight_all = 0
+    all_dict = {}
+    all_dict.update(gooses())
+    all_dict.update(cow())
+    all_dict.update(goat())
+    all_dict.update(sheep())
+    all_dict.update(duck())
+    print(all_dict)
+    for key, weight in all_dict.items():
+        if weight > weight_max:
+            name_animal = key
+            weight_max = weight
+        weight_all += weight_max
+    print(f"Общая масса всех животных равна {weight_all:.1f} килограмм, максимальная масса тела у животтного с именем "
+          f"{name_animal} и массой {weight_max} килограмм")
+
+
+max_weight()
