@@ -107,8 +107,7 @@ class Sheep(Animals):
 
     # Метод отображения количества снятого профита с овцы
     def get_wool(self):
-        if self.get_weight() > 0:
-            return self.wool
+        return self.wool
 
 
 class Chicken(Birds):
