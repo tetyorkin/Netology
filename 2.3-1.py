@@ -1,6 +1,7 @@
+#  Реализовать Польскую нотацию для двух положительных чисел.
 def change_place(item):
-    a = item
-    token = a.split(" ")
+    string_input = item
+    token = string_input.split(" ")  # разделяем строку по пробелу, для обращения по индексу к числам и оператору
     operators = ["+", "-", "*", "/"]
 
     try:
@@ -24,7 +25,7 @@ def change_place(item):
                 result = first * second
                 print(result)
     except IndexError:
-        print("Между числами и операторами должен быть пробел " "")
+        print("Между числами и операторами должен быть пробел ' '")
     except ValueError:
         print(f"Выражение должно начинаться с операторов {operators}")
 
