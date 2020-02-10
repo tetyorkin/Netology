@@ -1,35 +1,35 @@
 #  Реализовать Польскую нотацию для двух положительных чисел.
-def polish(item):
-    string_input = item
-    token = string_input.split(" ")  # разделяем строку по пробелу, для обращения по индексу к числам и оператору
+def polish(string_input):
+    token = string_input.split()  # разделяем строку по пробелу, для обращения по индексу к числам и оператору
     operators = ["+", "-", "*", "/"]
-    try:
-        first = (token[1])
-        second = (token[2])
-        operator = str(token[0])
-        assert operator in operators, f"Первый элемент выражения должен быть оператором {operators}"
-        assert first.isdigit(), "Второй элемент выражения должен быть числом"
-        assert first.isdigit(), "Третий элемент выражения должен быть числом"
-        if operator in operators:
+    if len(token) > 3:
+        print("Введено больше аргументов, необходимо ввести в формате 'оператор число1 число2'")
+    else:
+        try:
+            operator = str(token[0])
+            assert operator in operators, f"Первый аргумент выражения должен быть оператором {operators}"
+            first = int(token[1])
+            second = int(token[2])
             if operator == "+":
-                result = int(first) + int(second)
+                result = first + second
                 print(result)
             elif operator == "-":
-                result = int(first) - int(second)
+                result = first - second
                 print(result)
             elif operator == "/":
-                try:
-                    result = int(first) / int(second)
-                    print(result)
-                except ZeroDivisionError:
-                    print(f"Произошла ошибка, делить на {second} нельзя")
-            elif operator == "*":
-                result = int(first) * int(second)
+                result = first / second
                 print(result)
-    except AssertionError as msg:
-        print(msg)
-    except IndexError:
-        print("Элементы должны разделены пробелом ' '")
+            elif operator == "*":
+                result = first * second
+                print(result)
+        except AssertionError as msg:
+            print(msg)
+        except IndexError:
+            print("Передано не допустимое количество аргументов")
+        except ZeroDivisionError:
+            print("Произошла ошибка, делить на 0 нельзя")
+        except ValueError:
+            print("Операции допустимы только с числами")
 
 
 if __name__ == "__main__":
