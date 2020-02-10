@@ -1,35 +1,38 @@
 #  Реализовать Польскую нотацию для двух положительных чисел.
-def change_place(item):
+def polish(item):
     string_input = item
     token = string_input.split(" ")  # разделяем строку по пробелу, для обращения по индексу к числам и оператору
     operators = ["+", "-", "*", "/"]
-
     try:
-        first = int(token[1])
-        second = int(token[2])
+        first = (token[1])
+        second = (token[2])
         operator = str(token[0])
+        assert operator in operators, f"Первый элемент выражения должен быть оператором {operators}"
+        assert first.isdigit(), "Второй элемент выражения должен быть числом"
+        assert first.isdigit(), "Третий элемент выражения должен быть числом"
         if operator in operators:
             if operator == "+":
-                result = first + second
+                result = int(first) + int(second)
                 print(result)
             elif operator == "-":
-                result = first - second
+                result = int(first) - int(second)
                 print(result)
             elif operator == "/":
                 try:
-                    result = first / second
+                    result = int(first) / int(second)
                     print(result)
                 except ZeroDivisionError:
                     print(f"Произошла ошибка, делить на {second} нельзя")
             elif operator == "*":
-                result = first * second
+                result = int(first) * int(second)
                 print(result)
+    except AssertionError as msg:
+        print(msg)
     except IndexError:
-        print("Между числами и операторами должен быть пробел ' '")
-    except ValueError:
-        print(f"Выражение должно начинаться с операторов {operators}")
+        print("Элементы должны разделены пробелом ' '")
 
 
 if __name__ == "__main__":
-    user_input = input("Введите выражение: ")
-    change_place(user_input)
+    while True:
+        user_input = input("Введите выражение: ")
+        polish(user_input)
