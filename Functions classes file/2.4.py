@@ -1,27 +1,20 @@
-def split_on(what, delimiter=""):
-    splitted = [[]]
-    for item in what:
-        if item == delimiter:
-            splitted.append([])
-        else:
-            splitted[-1].append(item)
-    return splitted
-
-
-def open_file(name_file):
+def make_cook_book(name_file):
+    cook_book = {}
     with open(name_file, encoding='utf-8') as file:
-        cook_book = {}
-        receptes = []
         for line in file:
-            recept = line.strip()
-            receptes.append(recept)
-        receptes_1 = split_on(receptes)
-        for item in receptes_1:
-            indegrient = item[2:-1]
-            print(indegrient)
-        #     cook_book.update({item[0]:item[1:]})
-        # print(cook_book)
+            head = line.strip()
+            count_ingredients = int(file.readline().strip())
+            ingredients = []
+            for item in range(count_ingredients):
+                ingredient = file.readline().split('|')
+                all_ingredients = {'ingredient_name': ingredient[0].strip(),
+                                   'quantity': int(ingredient[1]),
+                                   'measure': ingredient[2].strip()}
+                ingredients.append(all_ingredients)
+            file.readline()
+            cook_book.update({head: ingredients})
+    return cook_book
 
 
 if __name__ == "__main__":
-    open_file('recipes.txt')
+    print(make_cook_book('recipes.txt'))
