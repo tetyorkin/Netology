@@ -150,7 +150,7 @@ def main():
         elif user_input == 'as':
             add_shelf()
         elif user_input == 'n':
-            show_name()
+            return show_name()
 
 
 main()
