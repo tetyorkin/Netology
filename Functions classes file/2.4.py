@@ -1,14 +1,26 @@
-import re
+def split_on(what, delimiter=""):
+    splitted = [[]]
+    for item in what:
+        if item == delimiter:
+            splitted.append([])
+        else:
+            splitted[-1].append(item)
+    return splitted
+
+
 def open_file(name_file):
-    regex = re.compile(r"(?P<head>^.+\n(?P<id>\d))", re.MULTILINE)
-    with open(name_file, encoding='utf8') as file:
-        for match in regex.finditer(file.read()):
-            r = []
-            r += [{match.group('head'): match.group('head')}]
-
-
-            print(r)
-
+    with open(name_file, encoding='utf-8') as file:
+        cook_book = {}
+        receptes = []
+        for line in file:
+            recept = line.strip()
+            receptes.append(recept)
+        receptes_1 = split_on(receptes)
+        for item in receptes_1:
+            indegrient = item[2:-1]
+            print(indegrient)
+        #     cook_book.update({item[0]:item[1:]})
+        # print(cook_book)
 
 
 if __name__ == "__main__":
