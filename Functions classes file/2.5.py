@@ -8,7 +8,7 @@ count = '12'
 size = '1000'
 cmd = f'ping {hostname} -l {size} -n {count}'
 
-
+# Контекст менеджер HostPing
 class HostPing:
     def __init__(self, commands):
         self.start_time = datetime.now()
