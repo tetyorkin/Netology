@@ -24,6 +24,18 @@ def more_six(core_dict):
     return big_word
 
 
+# Функция more_six_up() поиск слов будет с учётом регистра
+def more_six_up(core_dict):
+    new = core_dict['rss']['channel']['items']
+    big_word = []
+    for key in new:
+        item = key['description'].split()
+        for word in item:
+            if len(word) > 6:
+                big_word.append(word)
+    return big_word
+
+
 # С помощью библиоотеки collections, считаем количество вхождений каждого слова и выводим ТОП 10 слов
 def most_wanted(item):
     big_word_sorted = sorted(item)
@@ -37,6 +49,14 @@ def most_wanted(item):
 
 
 if __name__ == '__main__':
-    new_dict = read_file(NAME_FILE)
-    big_world = more_six(new_dict)
-    most_wanted(big_world)
+    while True:
+        user_input = input("\nУчитывать регистр при поиске ТОП 10 слов? (да/нет): ")
+        new_dict = read_file(NAME_FILE)
+        if user_input == 'нет':
+            big_world = more_six(new_dict)
+            most_wanted(big_world)
+        elif user_input == 'да':
+            big_world = more_six_up(new_dict)
+            most_wanted(big_world)
+        else:
+            print("Вы ввели что то не то. Попробуйте ещё раз")
