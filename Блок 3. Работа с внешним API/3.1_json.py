@@ -4,6 +4,7 @@ from collections import Counter
 NAME_FILE = 'newsafr.json'
 
 
+# Считываем файл и возвращаем словарь
 def read_file(file_name):
     with open(file_name, encoding='utf-8') as f:
         file_content = f.read()
@@ -11,8 +12,9 @@ def read_file(file_name):
         return templates
 
 
-def more_six(item):
-    new = item['rss']['channel']['items']
+# Доходим до ключа 'description', далее ищем слова более 6 символов, возвращвем список
+def more_six(core_dict):
+    new = core_dict['rss']['channel']['items']
     big_word = []
     for key in new:
         item = key['description'].split()
@@ -22,6 +24,7 @@ def more_six(item):
     return big_word
 
 
+# С помощью библиоотеки collections, считаем количество вхождений каждого слова и выводим ТОП 10 слов
 def most_wanted(item):
     big_word_sorted = sorted(item)
     counter = Counter(big_word_sorted)
