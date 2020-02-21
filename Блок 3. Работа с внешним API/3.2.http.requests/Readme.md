@@ -1,3 +1,4 @@
+![GitHub last commit](https://img.shields.io/github/last-commit/tetyorkin/Netology?style=plastic)
 # Домашнее задание к лекции 3.2 «Работа с библиотекой requests, http-запросы»
 
 Исходный код для выполнения домашней работы вы найдете в папке [3.2.http.requests](https://github.com/netology-code/py-homework-basic-files/tree/master/3.2.http.requests).
