@@ -34,7 +34,7 @@ def upload_files():
         files = {
             'file': open_read_file(name).encode('utf-8')
         }
-        requests.put(link, headers=headers, files=files)
+        requests.put(url=link, headers=headers, files=files)
         print(f'Файл {name} загружен на яндекс диск')
 
 
