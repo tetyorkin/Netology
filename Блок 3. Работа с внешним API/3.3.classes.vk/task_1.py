@@ -3,6 +3,8 @@ import time
 import private  # импортируем token
 
 TOKEN = private.TOKEN
+URL = 'https://api.vk.com/method/'
+VERSION_API = '5.103'
 
 
 class User:
@@ -10,13 +12,13 @@ class User:
         self.user_id = user_id
         self.first_name = first_name
         self.last_name = last_name
-        # self.friends_mutual = friends_mutual
 
-    def get_name(self, user_id):
+    # Метод для определения имени по id
+    def get_name(self):
         url = f'https://api.vk.com/method/users.get'
         params = {
             'access_token': TOKEN,
-            'user_id': user_id,
+            'user_id': self.user_id,
             'v': '5.103'
         }
         response = requests.get(url, params=params)
@@ -24,131 +26,86 @@ class User:
             name = f"{dict_user['first_name']} {dict_user['last_name']}"
             return name
 
-    def get_link(self, user_id):
-        url = f'https://vk.com/id{user_id}'
-        return url
+    # Метод определения id
+    def get_user_id(self):
+        return self.user_id
 
-    # def friends_mutual(self, user1, user2):
-    #     url = 'https://api.vk.com/method/friends.getMutual'
-    #     params = {
-    #         'access_token': TOKEN,
-    #         'source_uid': user1,
-    #         'target_uid': user2,
-    #         'v': '5.103'
-    #     }
-    #     response = requests.get(url, params=params)
-    #     i = 0
-    #     count = len(response.json()['response'])
-    #     if count != 0:
-    #         return response.json()['response']
-    #     else:
-    #         return 'Нет друзей'
+    # Метод вывода на экран ссылки
+    def __str__(self):
+        return self.get_link()
 
-    def friends_mutual(self, two_users):
-        users = str(two_users)
-        user1 = users.split('&')[0].strip(' ')
-        user2 = users.split('&')[1].strip(' ')
-        url = 'https://api.vk.com/method/friends.getMutual'
+    # Метод переопределения оператора &
+    def __and__(self, other):
+        user1 = (self.user_id)
+        user2 = (other.user_id)
+        return self.friends_mutual(user1, user2)
+
+    # Метод определения друзей пользователя
+    def get_friends(self):
+        method = 'friends.get'
+        url = f'{URL}{method}'
         params = {
             'access_token': TOKEN,
-            'source_uid': user1,
-            'target_uid': user2,
-            'v': '5.103'
+            'user_id': self.user_id,
+            'v': VERSION_API
         }
         response = requests.get(url, params=params)
-        print(response.json())
+        count = response.json()['response']['count']
+        user_list = (response.json()['response'])
+        user_list_in = user_list['items']
+        return f'количество друзей {count} список id друзей {user_list_in}'
+
+    # Метод создания ссылки на профиль
+    def get_link(self):
+        method = 'users.get'
+        url = f'{URL}{method}'
+        params = {
+            'access_token': TOKEN,
+            'user_id': self.user_id,
+            'fields': 'screen_name',
+            'v': VERSION_API
+        }
+        response = requests.get(url, params=params)
+        dict_user = {}
+        for dict_user in (response.json()['response']):
+            pass
+        link = f"https://vk.com/{dict_user['screen_name']}"
+        return link
+
+    # Метод опредления общих друзей между пользователями user1 и user2
+    def friends_mutual(self, user1, user2):
+        method = 'friends.getMutual'
+        url = f'{URL}{method}'
+        params = {
+            'access_token': TOKEN,
+            'source_uid': f'{user1}',
+            'target_uid': f'{user2}',
+            'v': VERSION_API
+        }
+        response = requests.get(url, params=params)
         i = 0
         count = len(response.json()['response'])
         if count != 0:
-            return response.json()['response']
+            # return response.json()['response']
+            print(f"Всего общих друзей у пользователей {user1} и {user2} - {len(response.json()['response'])}, "
+                  f"список их id:\n"
+                  f"{response.json()['response']}")
         else:
             return 'Нет друзей'
 
-    # def get_friends_mutual(self, user_id):
-    #     self.response = user_id
 
-
-#
-#
-# def get_info(user_id):
-#     params = {
-#         'access_token': TOKEN,
-#         'user_id': user_id,
-#         'v': '5.103'
-#     }
-#     response = requests.get(URL, params=params)
-#     user_list = (response.json()['response'])
-#     # print(user_list)
-#     dict_user = {}
-#     for dict_user in user_list:
-#         pass
-#     name = f"'{dict_user['first_name']} {dict_user['last_name']}' " \
-#            f"ссылка на страницу: https://vk.com/id{dict_user['id']}"
-#     return name
-#
-#
-# def get_friends(user_id):
-#     params = {
-#         'access_token': TOKEN,
-#         'user_id': user_id,
-#         'v': '5.103'
-#     }
-#     response = requests.get(URL2, params=params)
-#     user_list = (response.json()['response'])
-#     count = user_list['count']
-#     users_list = user_list['items']
-#     count = 0
-#     for line in users_list:
-#         try:
-#             count += 1
-#             print(f'{count} {get_info(line)}')
-#             time.sleep(0.09)
-#         except KeyError:
-#             print("Ошибка")
-#             continue
-#
-#
-# def get_friends_mutual(user1, user2):
-#     params = {
-#         'access_token': TOKEN,
-#         'source_uid': user1,
-#         'target_uid': user2,
-#         'v': '5.103'
-#     }
-#     response = requests.get(URL3, params=params)
-#     i = 0
-#     count = len(response.json()['response'])
-#     if count != 0:
-#         print(f'\nУ пользователей {get_info(user1)} и {get_info(user2)} общих друзей - {count}, это следующие друзья:')
-#         for line in response.json()['response']:
-#             try:
-#                 i += 1
-#                 print(f'{i} {get_info(line)}')
-#                 time.sleep(0.1)
-#             except KeyError:
-#                 print("Ошибка")
-#                 continue
-#     else:
-#         print(f'\nУ пользователей {get_info(user1)} и {get_info(user2)} нет общих друзей')
-def name_user(user_id):
-    user = User(user_id)
-    return user.get_name(user_id)
-
-
-def get_friend(users):
-    two_users = User(users)
-    return two_users.friends_mutual(users)
-
+def main():
+    # Определяем пользователей на основе класса User()
+    user1 = User(12249497)
+    user2 = User(35007449)
+    # Выводим на экран ссылки на профиля пользователей
+    print(user1)
+    print(user2)
+    # Находим id общих друзей user1 и user2
+    user1 & user2
+    print(f"У пользователя '{user1.get_name()}' страница {user1} его id {user1.get_user_id()}\n"
+          f"У пользователя '{user2.get_name()}' страница {user2} его id {user2.get_user_id()}\n")
 
 
 if __name__ == '__main__':
-    # user_input = input("Введите пользователей: ")
-    user_input = '35007449 & 12249497'
-    print(get_friend(user_input))
-    # print(get_friend(12249497, 35007449))
-    # print(name_user(12249497))
-    # user1 = User(12249497)
-    # print(user1.get_name(12249497))
-
-    # get_friends(35007449)
-    # print(get_info(35007449))
+    main()
