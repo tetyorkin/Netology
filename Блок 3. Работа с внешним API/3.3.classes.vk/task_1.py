@@ -67,10 +67,14 @@ class User:
         }
         response = requests.get(url, params=params)
         dict_user = {}
-        for dict_user in (response.json()['response']):
-            pass
-        link = f"https://vk.com/{dict_user['screen_name']}"
-        return link
+        if 'error' in response.json().keys():
+            print(f"Ошибка!  {response.json()['error']['error_msg']}")
+        else:
+            for dict_user in (response.json()['response']):
+                pass
+            link = f"https://vk.com/{dict_user['screen_name']}"
+            return link
+
 
     # Метод опредления общих друзей между пользователями user1 и user2
     def friends_mutual(self, user1, user2):
@@ -95,16 +99,19 @@ class User:
 
 
 def main():
-    # Определяем пользователей на основе класса User()
-    user1 = User(12249497)
-    user2 = User(35007449)
-    # Выводим на экран ссылки на профиля пользователей
-    print(user1)
-    print(user2)
-    # Находим id общих друзей user1 и user2
-    user1 & user2
-    print(f"У пользователя '{user1.get_name()}' страница {user1} его id {user1.get_user_id()}\n"
-          f"У пользователя '{user2.get_name()}' страница {user2} его id {user2.get_user_id()}\n")
+    try:
+        # Определяем пользователей на основе класса User()
+        user1 = User(12249497)
+        user2 = User(35007449)
+        # Выводим на экран ссылки на профиля пользователей
+        print(user1)
+        print(user2)
+        # Находим id общих друзей user1 и user2
+        user1 & user2
+        print(f"У пользователя '{user1.get_name()}' страница {user1} его id {user1.get_user_id()}\n"
+              f"У пользователя '{user2.get_name()}' страница {user2} его id {user2.get_user_id()}\n")
+    except TypeError:
+        print('Не удалось вывести содержимое! Сообщение об ошибке выше')
 
 
 if __name__ == '__main__':
