@@ -38,7 +38,7 @@ for dict_user in response.json():
     elif 0 < count < 10:
         d += 1
 print(f'\nНа время {dt.datetime.utcnow():%Y.%b.%d %H:%M} по UTC, статистика по группе PY-29 \'Основы языка '
-      f'программирования Python\' следующая:')
+      f'программирования Python\'  следующая:')
 print('-' * 51)
 print('Описание                      | Студенты | Процент|')
 print('-' * 51)
